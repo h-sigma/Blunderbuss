@@ -33,3 +33,5 @@
 *.out
 *.app
 
+!/Include/GameObjectIdea.hpp
+/cmake-build-debug/

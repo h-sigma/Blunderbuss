@@ -6,12 +6,17 @@
 #define BLUNDERBUSS_PHYSICSCOMPONENT_HPP
 
 class GameObject;
+class SceneObject;
+
+namespace sf{
+    class Time;
+}
 
 class PhysicsComponent
 {
 public:
     virtual ~PhysicsComponent() = default;
-    virtual void update(class GameObject&, sf::Time) = 0;
+    virtual void update(class GameObject&, sf::Time, class SceneObject*) = 0;
 };
 
 

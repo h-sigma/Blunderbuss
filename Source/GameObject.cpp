@@ -5,7 +5,7 @@
 #include <GameObject.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-GameObject::GameObject(Category category, InputComponent * input, PhysicsComponent * physics, GraphicsComponent * graphics)
+GameObject::GameObject(InputComponent * input, PhysicsComponent * physics, GraphicsComponent * graphics, Category::ID category = Category::GameObject)
 : SceneObject(category)
 , mInput(input)
 , mPhysics(physics)
@@ -21,9 +21,9 @@ void GameObject::drawCurrent(sf::RenderTarget & target, sf::RenderStates states)
     target.draw(*mGraphics, states);
 }
 
-void GameObject::updateCurrent(sf::Time) {
-    //mInput->update(*this, dt);
-    //mPhysics->update(*this, dt);
-    //mGraphics->update(*this, dt);
+void GameObject::updateCurrent(sf::Time dt, SceneObject* World) {
+    mInput->update(*this, dt, World);
+    mPhysics->update(*this, dt, World);
+    mGraphics->update(*this, dt, World);
 }
 

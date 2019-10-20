@@ -15,10 +15,10 @@
 class GameObject : public SceneObject
 {
 public:
-    explicit GameObject(Category, InputComponent*, PhysicsComponent*, GraphicsComponent*);
+    explicit GameObject(InputComponent*, PhysicsComponent*, GraphicsComponent*, Category::ID);
     sf::FloatRect getBoundingRect() const override;
     void drawCurrent(sf::RenderTarget&, sf::RenderStates) const override;
-    void updateCurrent(sf::Time dt) override;
+    void updateCurrent(sf::Time dt, SceneObject* World) override;
 protected:
 
 private:

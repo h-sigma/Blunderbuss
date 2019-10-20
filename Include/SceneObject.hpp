@@ -23,9 +23,10 @@ public:
     using Ptr = std::unique_ptr<SceneObject>;
     using Pair = std::pair<SceneObject*, SceneObject*>;
 public:
-    explicit SceneObject(Category category = Category::SceneObject);
+    explicit SceneObject(Category::ID category = Category::SceneObject);
+    ~SceneObject() override = default;
 
-    void update(sf::Time);
+    void update(sf::Time, SceneObject* World);   //time, world
 
     void attachChild(Ptr child);
     Ptr detachChild(const SceneObject& node);
@@ -34,14 +35,14 @@ public:
     sf::Vector2f getWorldPosition() const;
     virtual sf::FloatRect getBoundingRect() const { return sf::FloatRect{}; }
 
-    [[nodiscard]] Category getCategory() const noexcept { return mCategory; }
+    [[nodiscard]] Category::ID getCategory() const noexcept { return mCategory; }
 protected:
     void draw(sf::RenderTarget&, sf::RenderStates states) const;
     virtual void drawCurrent(sf::RenderTarget&, sf::RenderStates) const;
-    virtual void updateCurrent(sf::Time dt);
-    void updateChildren(sf::Time dt);
+    virtual void updateCurrent(sf::Time dt, SceneObject*);
+    void updateChildren(sf::Time dt, SceneObject* World);
 protected:
-    Category mCategory;
+    Category::ID mCategory;
 private:
     std::vector<Ptr> mChildren;
     SceneObject* mParent;

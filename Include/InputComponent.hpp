@@ -5,14 +5,18 @@
 #ifndef BLUNDERBUSS_INPUTCOMPONENT_HPP
 #define BLUNDERBUSS_INPUTCOMPONENT_HPP
 
+class SceneObject;
 class GameObject;
-class World;
+
+namespace sf{
+    class Time;
+}
 
 class InputComponent
 {
 public:
     virtual ~InputComponent() = default;
-    virtual void update(class GameObject&, World&) = 0;
+    virtual void update(class GameObject&, sf::Time, class SceneObject*) = 0;
 };
 
 #endif //BLUNDERBUSS_INPUTCOMPONENT_HPP

@@ -1,0 +1,5 @@
+October 20, 2019
+~~~~~~~~~~~~~~~~~~~~
+I've amassed enough tools to start building this game. Any more and I would risk writing code that never gets used.
+Time to write project-centric code.
+To-do: Write the generic high-level abstraction.

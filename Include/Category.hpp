@@ -5,11 +5,11 @@
 #ifndef BLUNDERBUSS_CATEGORY_HPP
 #define BLUNDERBUSS_CATEGORY_HPP
 
-enum Category
-{
-    SceneObject,
-    GameObject,
-    AnimationObject
-};
-
+namespace Category {
+    enum ID {
+        SceneObject,
+        GameObject,
+        AnimationObject
+    };
+}
 #endif //BLUNDERBUSS_CATEGORY_HPP

@@ -5,7 +5,7 @@
 #include <SceneObject.hpp>
 #include <cassert>
 
-SceneObject::SceneObject(Category category) : mCategory(category), mParent(nullptr) {
+SceneObject::SceneObject(Category::ID category) : mCategory(category), mParent(nullptr) {
 
 }
 
@@ -49,15 +49,15 @@ void SceneObject::drawCurrent(sf::RenderTarget &, sf::RenderStates) const {
     //by default draws nothing, simpyly an interface
 }
 
-void SceneObject::update(sf::Time dt) {
-    updateCurrent(dt);
-    updateChildren(dt);
+void SceneObject::update(sf::Time dt, SceneObject* World) {
+    updateCurrent(dt, World);
+    updateChildren(dt, World);
 }
 
-void SceneObject::updateCurrent(sf::Time) {
+void SceneObject::updateCurrent(sf::Time, SceneObject*) {
     // by default does nothing
 }
 
-void SceneObject::updateChildren(sf::Time dt) {
-    std::for_each(begin(mChildren), end(mChildren), [dt](Ptr& childObj) { childObj->update(dt); });
+void SceneObject::updateChildren(sf::Time dt, SceneObject* World)  {
+    std::for_each(begin(mChildren), end(mChildren), [dt, World](Ptr& childObj) { childObj->update(dt, World); });
 }

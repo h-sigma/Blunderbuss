@@ -12,10 +12,10 @@ namespace sf {
 	class Texture;
 }
 
+template<typename ParallaxEnum>
 class Parallax
 {
 public:
-	using ParallaxEnum = Para::Paralayer;
 	using ParallaxHolder = ResourceHolder<sf::Texture, ParallaxEnum>;
 public:
 	explicit Parallax(ParallaxHolder*, LayeredDraw*);
@@ -26,6 +26,8 @@ public:
 
 	//sprite management
 	void setScale(ParallaxEnum pe, float scaleX, float scaleY);
+	void fitToWindowX(sf::Window);
+	void fitToWindowY(sf::Window);
 private:
 	struct Layer {
 		LayeredDraw::ID_size id = 0;
