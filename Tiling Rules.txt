@@ -1,0 +1,19 @@
+Tiling Architecture.
+
+Let's start easy.
+
+TileManager:
+	1. vector<TileLayer>  <-----<	pointer
+	2. TileBuilder    ----------^
+
+TileLayer:
+	A vector<TileTypes> that locally stores all TileTypes queried from TileBuilder. A TileType is actually just an sf::Sprite that stores sf::Texture* and TextureRect.
+	A vector<Tile> that locally stores all the Tile info loaded from a file.
+	A vector<sf::VertexArray> for each TileType.
+
+	Here's the fun stuff:
+		1. The Tile holds world co-ordinates and index of TileType. This is achieved by reading order of TileTypes from file, putting it in a small map, and then assigning indices from that map to the Tile objects based on their std::string tile names.
+
+TileBuilder:
+	A Tilemap Manager that can load and hold spritesheets.
+	left >> top >> width >> height

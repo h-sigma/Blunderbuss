@@ -1,0 +1,4 @@
+Plain 0 0
+Grass1 32 0
+Grass2 64 0
+Grass3 96 0

@@ -1,0 +1,33 @@
+Grassland
+-
+Plain 0 0
+Plain 1 0
+Plain 2 0
+Plain 3 0
+Plain 4 0
+Plain 5 0
+Plain 6 0
+Plain 0 1
+Plain 1 1
+Plain 2 1
+Plain 3 1
+Plain 4 1
+Plain 5 1
+Plain 6 1
+Plain 0 2
+Plain 1 2
+Plain 2 2
+Plain 3 2
+Plain 4 2
+Plain 5 2
+Plain 6 2
+Plain 0 3
+Plain 1 3
+Plain 2 3
+Plain 3 3
+Plain 4 3
+Plain 5 3
+Plain 6 3
+
+
+
