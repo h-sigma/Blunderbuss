@@ -7,12 +7,20 @@ find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 include_directories(Include)
 include_directories(/usr/include/glm)
+include_directories(3rdPartyLibs/DearImGui/)
 
+#DearImGui Files
+file(GLOB_RECURSE DearImGui_FILES
+        ${CMAKE_SOURCE_DIR}/3rdPartyLibs/DearImGui/*.cpp)
+
+add_library(ImGui ${DearImGui_FILES})
+
+#Blunderbuss Source Files
 file(GLOB_RECURSE SOURCE_FILES
         ${CMAKE_SOURCE_DIR}/Source/*.c
         ${CMAKE_SOURCE_DIR}/Source/*.cpp)
 
-# Add header files
+#Blunderbuss header files
 file(GLOB_RECURSE HEADER_FILES
         ${CMAKE_SOURCE_DIR}/Include/*.h
         ${CMAKE_SOURCE_DIR}/Include/*.hpp)
@@ -20,5 +28,8 @@ file(GLOB_RECURSE HEADER_FILES
 add_executable(Blunderbuss
         ${HEADER_FILES}
         ${SOURCE_FILES})
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS})
 
+target_link_libraries(Blunderbuss OpenGL ImGui)
 target_link_libraries(Blunderbuss sfml-graphics sfml-window sfml-system)

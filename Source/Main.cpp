@@ -1,71 +1,68 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <LayeredDraw.hpp>
-#include <TileManager.hpp>
-#include <Parallax.hpp>
-#include <FixedRingBuffer.hpp>
-#include <DynamicRingBuffer.hpp>
-#include <random>
+#include <Application.hpp>
+#include <imgui.h>
+#include <imgui-SFML.h>
+
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Window/Event.hpp>
 
 int main()
 {
-    sf::Vector2u windowSize(1280u, 800u);
-	sf::RenderWindow mWindow(sf::VideoMode(windowSize.x ,windowSize.y), "Blunderbuss", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(640, 480), "");
+    window.setVerticalSyncEnabled(true);
+    ImGui::SFML::Init(window);
 
-	LayeredDraw ld;
-	//TileManager tm(&ld, "Media/Levels/LevelTut/LayerGroup.txt");
+    sf::Color bgColor;
 
-	sf::Texture texture;
-	texture.loadFromFile("Media/TileSet/BoxMan.png");
-	sf::Sprite player(texture);
-	auto rect = player.getTextureRect();
-	player.setOrigin(player.getOrigin() + sf::Vector2f( rect.width, rect.height ) / 2.f);
+    float color[3] = { 0.f, 0.f, 0.f };
 
-	ld.addDrawable(player, 200);
+    // let's use char array as buffer, see next part
+    // for instructions on using std::string with ImGui
+    char windowTitle[255] = "ImGui + SFML = <3";
 
-	sf::Clock clock;
-	sf::Time dt = clock.restart();
-	std::cout << std::boolalpha;
-	while (mWindow.isOpen())
-	{
-		sf::Event event = sf::Event();
-		sf::Vector2f offset;
-		while (mWindow.pollEvent(event))
-		{
-			offset = { 0.f , 0.f };
-			if (event.type == sf::Event::Closed)
-				mWindow.close();
-			else if (event.type == sf::Event::KeyReleased)
-			{
-				switch (event.key.code)
-				{
-				case sf::Keyboard::Escape:
-					mWindow.close();
-					break;
-				case sf::Keyboard::Right:
-					offset.x += 1.f;
-					break;
-				case sf::Keyboard::Left:
-					offset.x -= 1.f;
-					break;
-				case sf::Keyboard::Up:
-					offset.y -= 1.f;
-					break;
-				case sf::Keyboard::Down:
-					offset.y += 1.f;
-					break;
-				}
-			}
-		}
-		auto defview = mWindow.getView();
-		defview.move(offset);
-		mWindow.setView(defview);
+    window.setTitle(windowTitle);
+    window.resetGLStates(); // call it if you only draw ImGui. Otherwise not needed.
+    sf::Clock deltaClock;
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            ImGui::SFML::ProcessEvent(event);
 
-		par.update(sf::Vector2i(player.getPosition()), sf::Vector2i(mWindow.getSize()));
-		player.setPosition(defview.getCenter());
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
 
-		mWindow.clear();
-		mWindow.draw(ld);
-		mWindow.display();
-	}
+        ImGui::SFML::Update(window, deltaClock.restart());
+
+        ImGui::Begin("Sample window"); // begin window
+
+        // Background color edit
+        if (ImGui::ColorEdit3("Background color", color)) {
+            // this code gets called if color value changes, so
+            // the background color is upgraded automatically!
+            bgColor.r = static_cast<sf::Uint8>(color[0] * 255.f);
+            bgColor.g = static_cast<sf::Uint8>(color[1] * 255.f);
+            bgColor.b = static_cast<sf::Uint8>(color[2] * 255.f);
+        }
+
+        // Window title text edit
+        ImGui::InputText("Window title", windowTitle, 255);
+
+        if (ImGui::Button("Update window title")) {
+            // this code gets if user clicks on the button
+            // yes, you could have written if(ImGui::InputText(...))
+            // but I do this to show how buttons work :)
+            window.setTitle(windowTitle);
+        }
+        ImGui::End(); // end window
+
+        window.clear(bgColor); // fill background with color
+        ImGui::SFML::Render(window);
+        window.display();
+    }
+
+    ImGui::SFML::Shutdown();
+    Application app;
+    app.run();
 }
