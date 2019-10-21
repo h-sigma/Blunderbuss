@@ -16,11 +16,13 @@ class GameObject : public SceneObject
 {
 public:
     explicit GameObject(InputComponent*, PhysicsComponent*, GraphicsComponent*, Category::ID);
-    sf::FloatRect getBoundingRect() const override;
+    ~GameObject() override;
     void drawCurrent(sf::RenderTarget&, sf::RenderStates) const override;
     void updateCurrent(sf::Time dt, SceneObject* World) override;
+    InputComponent* getInputComponent() const { return mInput; }
+    PhysicsComponent* getPhysicsComponent() const { return mPhysics; }
+    GraphicsComponent* getGraphicsComponent() const { return mGraphics; }
 protected:
-
 private:
     InputComponent* mInput;
     PhysicsComponent* mPhysics;

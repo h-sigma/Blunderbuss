@@ -13,10 +13,6 @@ GameObject::GameObject(InputComponent * input, PhysicsComponent * physics, Graph
 {
 }
 
-sf::FloatRect GameObject::getBoundingRect() const {
-    return mGraphics->getBoundingRect();
-}
-
 void GameObject::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const {
     target.draw(*mGraphics, states);
 }
@@ -27,3 +23,8 @@ void GameObject::updateCurrent(sf::Time dt, SceneObject* World) {
     mGraphics->update(*this, dt, World);
 }
 
+GameObject::~GameObject() {
+    delete mInput;
+    delete mPhysics;
+    delete mGraphics;
+}

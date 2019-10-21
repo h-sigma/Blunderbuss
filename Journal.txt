@@ -3,3 +3,8 @@ October 20, 2019
 I've amassed enough tools to start building this game. Any more and I would risk writing code that never gets used.
 Time to write project-centric code.
 To-do: Write the generic high-level abstraction.
+Done: October 21, 2019: Wrote Application, StateStack and State abstractions.
+
+October 21, 2019
+~~~~~~~~~~~~~~~~~~~~
+To-Do: Begin work on the Game state.

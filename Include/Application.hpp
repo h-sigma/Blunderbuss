@@ -10,6 +10,7 @@
 #include <ResourceIdentifier.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "StateStack.hpp"
 
 namespace sf{
     class Time;
@@ -18,7 +19,7 @@ namespace sf{
 class Application
 {
 public:
-    explicit Application() = default;
+    explicit Application();
     void run();
 private:
     void processInput();
@@ -28,9 +29,10 @@ private:
     sf::RenderWindow mWindow;
     TextureHolder mTextureHolder;
     FontHolder mFontHolder;
+    StateStack mStack;
     //MusicPlayer, SoundPlayer => Some other day!
     //StateStack and StateContext => Soon, amigos!
-    const sf::Time timePerFrame = sf::seconds(1.f/60.f);
+    const sf::Time timePerFrame;
 };
 
 #endif //BLUNDERBUSS_APPLICATION_HPP
