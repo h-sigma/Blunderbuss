@@ -8,3 +8,8 @@ Done: October 21, 2019: Wrote Application, StateStack and State abstractions.
 October 21, 2019
 ~~~~~~~~~~~~~~~~~~~~
 To-Do: Begin work on the Game state.
+Done: October 22,2019: Wrote GameState and even the World class.
+
+October 22, 2019
+~~~~~~~~~~~~~~~~~~~~
+To-Do: Build a prototype for the rest of the architecture.

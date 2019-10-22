@@ -8,8 +8,8 @@
 
 Application::Application()
         : mWindow(sf::VideoMode(1280,800), "Blunderbuss", sf::Style::Default)
-        , timePerFrame(sf::seconds(1.f/60.f))
         , mStack(State::Context{&mWindow, &mTextureHolder, &mFontHolder})
+        , timePerFrame(sf::seconds(1.f/60.f))
 {
     mStack.registerState<GameState>(States::Game);
     mStack.pushState(States::Game);

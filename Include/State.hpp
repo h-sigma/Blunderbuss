@@ -41,9 +41,9 @@ protected:
     void requestStackPop();
     void requestStackClear();
 
+    Context mContext;
 private:
     StateStack* mStack;
-    Context mContext;
 };
 
 #endif //BLUNDERBUSS_STATE_HPP
