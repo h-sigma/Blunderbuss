@@ -16,7 +16,7 @@ class InputComponent
 {
 public:
     virtual ~InputComponent() = default;
-    virtual void update(class GameObject&, sf::Time, class SceneObject*) = 0;
+    virtual void update(class GameObject&, sf::Time, class World&) = 0;
 };
 
 #endif //BLUNDERBUSS_INPUTCOMPONENT_HPP

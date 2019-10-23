@@ -2,4 +2,9 @@
 // Created by harshdeep on 22/10/19.
 //
 
-#include "PrefabDispenser.hpp"
+#include <PrefabDispenser.hpp>
+
+void PrefabDispenser::addPrefab(const std::string& name, Func& func) {
+    assert(mMap.find(name) == mMap.end());
+    mMap.emplace(name, func);
+}

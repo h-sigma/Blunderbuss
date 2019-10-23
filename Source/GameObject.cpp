@@ -17,10 +17,10 @@ void GameObject::drawCurrent(sf::RenderTarget & target, sf::RenderStates states)
     target.draw(*mGraphics, states);
 }
 
-void GameObject::updateCurrent(sf::Time dt, SceneObject* World) {
-    mInput->update(*this, dt, World);
-    mPhysics->update(*this, dt, World);
-    mGraphics->update(*this, dt, World);
+void GameObject::updateCurrent(sf::Time dt, class World& world) {
+    mInput->update(*this, dt, world);
+    mPhysics->update(*this, dt, world);
+    mGraphics->update(*this, dt, world);
 }
 
 GameObject::~GameObject() {

@@ -34,8 +34,8 @@ void StateStack::update(sf::Time dt)
 
 void StateStack::draw()
 {
-    std::for_each(mStack.begin(), mStack.end(), [](auto iter){
-        (*iter)->draw();
+    std::for_each(mStack.begin(), mStack.end(), [](auto& iter){
+        iter->draw();
     });
     applyPendingChanges();
 }

@@ -11,9 +11,9 @@ class PurloxInput : public InputComponent
 {
 public:
     ~PurloxInput() override = default;
-    void update(class GameObject&, sf::Time, SceneObject*) override;
+    void update(class GameObject&, sf::Time, class World&) override;
 private:
-    void handleMovement(class GameObject&, SceneObject*) ;
+    void handleMovement(class GameObject&, class World &) ;
 private:
     //state variables
 

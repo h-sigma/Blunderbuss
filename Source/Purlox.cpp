@@ -5,8 +5,9 @@
 #include <SFML/System.hpp>
 #include <Purlox.hpp>
 
-void PurloxInput::update(class GameObject & , sf::Time, class SceneObject* ) {
+void PurloxInput::handleMovement(class GameObject & , class World &)  {
 }
 
-void PurloxInput::handleMovement(class GameObject & , class SceneObject* )  {
+void PurloxInput::update(class GameObject & gameObject, sf::Time, class World & world) {
+    handleMovement(gameObject, world);
 }

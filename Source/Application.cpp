@@ -41,6 +41,8 @@ void Application::processInput() {
     while(mWindow.pollEvent(event))
     {
         //call handleEvent on states
+        if(event.type == sf::Event::Closed)
+            mStack.clearStates();
         mStack.handleEvent(event);
     }
 }

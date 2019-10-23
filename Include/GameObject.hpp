@@ -18,7 +18,7 @@ public:
     explicit GameObject(InputComponent*, PhysicsComponent*, GraphicsComponent*, Category::ID);
     ~GameObject() override;
     void drawCurrent(sf::RenderTarget&, sf::RenderStates) const override;
-    void updateCurrent(sf::Time dt, SceneObject* World) override;
+    void updateCurrent(sf::Time dt, class World&) override;
     InputComponent* getInputComponent() const { return mInput; }
     PhysicsComponent* getPhysicsComponent() const { return mPhysics; }
     GraphicsComponent* getGraphicsComponent() const { return mGraphics; }

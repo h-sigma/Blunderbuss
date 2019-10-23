@@ -17,7 +17,7 @@
  * A SceneObject has a position in space (a 3x3 Matrix Transform for position, rotation, scale), can be
  */
 
-class SceneObject : public sf::Transformable, public sf::NonCopyable
+class SceneObject : public sf::Drawable, public sf::Transformable, public sf::NonCopyable
 {
 public:
     using Ptr = std::unique_ptr<SceneObject>;
@@ -26,7 +26,7 @@ public:
     explicit SceneObject(Category::ID category = Category::SceneObject);
     ~SceneObject() override = default;
 
-    void update(sf::Time, SceneObject* World);   //time, world
+    void update(sf::Time, class World&);   //time, world
 
     void attachChild(Ptr child);
     Ptr detachChild(const SceneObject& node);
@@ -37,10 +37,11 @@ public:
 
     [[nodiscard]] Category::ID getCategory() const noexcept { return mCategory; }
 protected:
-    void draw(sf::RenderTarget&, sf::RenderStates states) const;
+    void draw(sf::RenderTarget&, sf::RenderStates states) const override;
     virtual void drawCurrent(sf::RenderTarget&, sf::RenderStates) const;
-    virtual void updateCurrent(sf::Time dt, SceneObject*);
-    void updateChildren(sf::Time dt, SceneObject* World);
+
+    virtual void updateCurrent(sf::Time dt, class World&);
+    void updateChildren(sf::Time dt, class World&);
 protected:
     Category::ID mCategory;
 private:

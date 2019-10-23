@@ -9,6 +9,7 @@
 #include <queue>
 #include <State.hpp>
 #include <SceneLoader.hpp>
+#include <PrefabDispenser.hpp>
 
 namespace sf{
     class Event;
@@ -19,22 +20,29 @@ namespace sf{
 class World : public sf::Drawable {
 public:
     enum class Event{
-        moveUp, moveLeft, moveDown, moveRight, Jump,
+        Up, Left, Down, Right, Jump,
     };
     using EventQueue = std::vector<World::Event>;
 public:
     explicit World(State::Context);
+    ~World() override = default;
 
     void update(sf::Time);
 
     [[nodiscard]] const EventQueue& readQueue() const { return mQueue; }
     void pushEventToQueue(const sf::Event& event);
+    void queueLoadScene(std::string);
 protected:
     void draw(sf::RenderTarget&, sf::RenderStates) const override;
 private:
+    void loadScene();
+    std::string mNextSceneToLoad = "";
+private:
     EventQueue mQueue;
     State::Context mContext;
+    PrefabDispenser mDispenser;
     SceneLoader mLoader;
+    SceneObject::Ptr mGameScene;
 };
 
 

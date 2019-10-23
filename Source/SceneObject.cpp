@@ -49,15 +49,16 @@ void SceneObject::drawCurrent(sf::RenderTarget &, sf::RenderStates) const {
     //by default draws nothing, simpyly an interface
 }
 
-void SceneObject::update(sf::Time dt, SceneObject* World) {
-    updateCurrent(dt, World);
-    updateChildren(dt, World);
+void SceneObject::update(sf::Time dt, class World& world) {
+    updateCurrent(dt, world);
+    updateChildren(dt, world);
 }
 
-void SceneObject::updateCurrent(sf::Time, SceneObject*) {
+void SceneObject::updateCurrent(sf::Time, class World&) {
     // by default does nothing
 }
 
-void SceneObject::updateChildren(sf::Time dt, SceneObject* World)  {
-    std::for_each(begin(mChildren), end(mChildren), [dt, World](Ptr& childObj) { childObj->update(dt, World); });
+void SceneObject::updateChildren(sf::Time dt, class World& world)  {
+    std::for_each(begin(mChildren), end(mChildren), [dt, &world](Ptr& childObj) { childObj->update(dt, world); });
 }
+
