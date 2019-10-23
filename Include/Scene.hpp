@@ -8,16 +8,21 @@
 #include <SceneObject.hpp>
 #include <PrefabDispenser.hpp>
 
+template<typename Derived>
 class Scene
 {
 public:
     using Ptr = SceneObject::Ptr;
 public:
-    explicit Scene() = default;
-    virtual ~Scene() = default;
-    virtual Ptr get(PrefabDispenser&) = 0;
-protected:
-    //Implementation Details
+    Scene() = delete;
+    static void setup(PrefabDispenser& dispenser)
+    {
+        Derived::setup(dispenser);
+    }
+    static Ptr get(const PrefabDispenser& dispenser)
+    {
+        return Derived::get(dispenser);
+    }
 };
 
 #endif //BLUNDERBUSS_SCENE_HPP

@@ -6,6 +6,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Window/Event.hpp>
+#include <TestScene.hpp>
 
 void World::pushEventToQueue(const sf::Event &event) {
     //Modify this to have a "key mapper" later
@@ -75,6 +76,9 @@ void World::pushEventToQueue(const sf::Event &event) {
                 case sf::Keyboard::Z:
                     mQueue.push_back(Event::Jump);
                     break;
+                case sf::Keyboard::P:
+                    mQueue.push_back(Event::Print);
+                    break;
                 default:
                     break;
             }
@@ -84,19 +88,21 @@ void World::pushEventToQueue(const sf::Event &event) {
 }
 
 World::World(State::Context context) : mContext(context), mLoader(mDispenser), mGameScene(nullptr){
-
+    mLoader.registerScene<TestScene>("TestScene");
+    queueLoadScene("TestScene");
 }
 
 void World::update(sf::Time dt) {
     loadScene();
 
     if(mGameScene)
-    mGameScene->update(dt, *this);
+        mGameScene->update(dt, *this);
+    mQueue.clear();
 }
 
 void World::draw(sf::RenderTarget & target, sf::RenderStates states) const {
     if(mGameScene)
-    target.draw(*mGameScene, states);
+        target.draw(*mGameScene, states);
 }
 
 void World::queueLoadScene(std::string sceneName) {

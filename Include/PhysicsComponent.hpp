@@ -16,6 +16,7 @@ class PhysicsComponent
 {
 public:
     virtual ~PhysicsComponent() = default;
+    virtual void setup() = 0;
     virtual void update(class GameObject&, sf::Time, class World&) = 0;
 };
 

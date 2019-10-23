@@ -11,6 +11,9 @@ GameObject::GameObject(InputComponent * input, PhysicsComponent * physics, Graph
 , mPhysics(physics)
 , mGraphics(graphics)
 {
+    mInput->setup();
+    mPhysics->setup();
+    mGraphics->setup();
 }
 
 void GameObject::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const {
@@ -21,10 +24,4 @@ void GameObject::updateCurrent(sf::Time dt, class World& world) {
     mInput->update(*this, dt, world);
     mPhysics->update(*this, dt, world);
     mGraphics->update(*this, dt, world);
-}
-
-GameObject::~GameObject() {
-    delete mInput;
-    delete mPhysics;
-    delete mGraphics;
 }

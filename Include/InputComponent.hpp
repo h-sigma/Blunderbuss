@@ -16,6 +16,7 @@ class InputComponent
 {
 public:
     virtual ~InputComponent() = default;
+    virtual void setup() = 0;
     virtual void update(class GameObject&, sf::Time, class World&) = 0;
 };
 

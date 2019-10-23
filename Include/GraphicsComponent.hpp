@@ -20,6 +20,7 @@ class GraphicsComponent : public sf::Drawable
 {
 public:
     ~GraphicsComponent() override = default;
+    virtual void setup() = 0;
     virtual void update(class SceneObject&, sf::Time, class World&) = 0;
     [[nodiscard]] virtual sf::FloatRect getBoundingRect() const = 0;
 protected:

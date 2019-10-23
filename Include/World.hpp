@@ -20,7 +20,7 @@ namespace sf{
 class World : public sf::Drawable {
 public:
     enum class Event{
-        Up, Left, Down, Right, Jump,
+        Up, Left, Down, Right, Jump, Print
     };
     using EventQueue = std::vector<World::Event>;
 public:

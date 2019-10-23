@@ -17,7 +17,7 @@ public:
 public:
     PrefabDispenser() = default;
     template<typename T> std::unique_ptr<T> getPrefab(const std::string&) const;
-    void addPrefab(const std::string&, Func&);
+    void addPrefab(const std::string&, const Func&);
 private:
     std::unordered_map<std::string, Func> mMap;
 };

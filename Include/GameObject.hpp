@@ -16,17 +16,17 @@ class GameObject : public SceneObject
 {
 public:
     explicit GameObject(InputComponent*, PhysicsComponent*, GraphicsComponent*, Category::ID);
-    ~GameObject() override;
-    void drawCurrent(sf::RenderTarget&, sf::RenderStates) const override;
-    void updateCurrent(sf::Time dt, class World&) override;
-    InputComponent* getInputComponent() const { return mInput; }
-    PhysicsComponent* getPhysicsComponent() const { return mPhysics; }
-    GraphicsComponent* getGraphicsComponent() const { return mGraphics; }
+    ~GameObject() override = default;
+    void drawCurrent    (sf::RenderTarget&, sf::RenderStates) const override;
+    void updateCurrent  (sf::Time dt,       class World&    )       override;
+    InputComponent*     getInputComponent()     const { return mInput.get()   ; }
+    PhysicsComponent*   getPhysicsComponent()   const { return mPhysics.get() ; }
+    GraphicsComponent*  getGraphicsComponent()  const { return mGraphics.get(); }
 protected:
 private:
-    InputComponent* mInput;
-    PhysicsComponent* mPhysics;
-    GraphicsComponent* mGraphics;
+    std::unique_ptr<InputComponent>     mInput;
+    std::unique_ptr<PhysicsComponent>   mPhysics;
+    std::unique_ptr<GraphicsComponent>  mGraphics;
 };
 
 #endif //BLUNDERBUSS_GAMEOBJECT_HPP

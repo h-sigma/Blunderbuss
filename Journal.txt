@@ -23,4 +23,12 @@ Done: The overall architecture of Application/StateStack/State/World/SceneLoader
 A challenge stands before me: how do I add prefabs to my PrefabDispenser class? I have a few solutions in mind:
 1. Use the service-locator or singleton pattern, but this would only spread out definitions in my codebase.
 2. For each Scene derived class, add a new function `setup`, which is static and called when that scene is registered with the SceneLoader.
-3.
+
+First, time to implement CRTP for Scene, as then I should be able to use the static madness with polymorphism.
+
+AAAAND success!
+
+The basic architecture functions!
+Time to design the components for the playable character.
+
+To-Do: Design components for the playable character to begin some semblance of a game.

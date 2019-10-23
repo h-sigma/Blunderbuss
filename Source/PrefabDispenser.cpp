@@ -4,7 +4,7 @@
 
 #include <PrefabDispenser.hpp>
 
-void PrefabDispenser::addPrefab(const std::string& name, Func& func) {
+void PrefabDispenser::addPrefab(const std::string& name, const Func& func) {
     assert(mMap.find(name) == mMap.end());
     mMap.emplace(name, func);
 }

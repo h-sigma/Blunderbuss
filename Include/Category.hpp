@@ -9,7 +9,8 @@ namespace Category {
     enum ID {
         SceneObject,
         GameObject,
-        AnimationObject
+        AnimationObject,
+        Player
     };
 }
 #endif //BLUNDERBUSS_CATEGORY_HPP

@@ -7,7 +7,7 @@
 #include "Application.hpp"
 
 Application::Application()
-        : mWindow(sf::VideoMode(1280,800), "Blunderbuss", sf::Style::Default)
+        : mWindow(sf::VideoMode(640,400), "Blunderbuss", sf::Style::Default)
         , mStack(State::Context{&mWindow, &mTextureHolder, &mFontHolder})
         , timePerFrame(sf::seconds(1.f/60.f))
 {
@@ -53,5 +53,7 @@ void Application::update(sf::Time dt) {
 
 void Application::render() {
     //call render on stack
+    mWindow.clear();
     mStack.draw();
+    mWindow.display();
 }
