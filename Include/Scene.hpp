@@ -13,12 +13,11 @@ class Scene
 public:
     using Ptr = SceneObject::Ptr;
 public:
-    explicit Scene(PrefabDispenser*);
+    explicit Scene() = default;
     virtual ~Scene() = default;
-    virtual Ptr get() = 0;
+    virtual Ptr get(PrefabDispenser&) = 0;
 protected:
     //Implementation Details
-    PrefabDispenser* mFactory = nullptr;
 };
 
 #endif //BLUNDERBUSS_SCENE_HPP

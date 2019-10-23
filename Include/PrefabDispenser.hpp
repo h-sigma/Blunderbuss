@@ -6,8 +6,17 @@
 #define BLUNDERBUSS_PREFABDISPENSER_HPP
 
 
-class PrefabDispenser {
+#include <memory>
+#include <functional>
+#include <SceneObject.hpp>
 
+class PrefabDispenser {
+public:
+    PrefabDispenser() = default;
+    template<typename T> std::unique_ptr<T> getPrefab(const std::string&) const;
+    template<typename T> void addPrefab(std::function<SceneObject::Ptr()>);
+private:
+    //implementation details
 };
 
 

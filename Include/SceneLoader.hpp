@@ -15,7 +15,7 @@ public:
 public:
     explicit SceneLoader() = default;
     Ptr loadScene(const std::string&);
-    void registerScene(const std::string&, Scene);
+    template<typename T> void registerScene(const std::string&);
 private:
     //implementation details
 };
