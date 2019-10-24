@@ -5,8 +5,8 @@
 #ifndef BLUNDERBUSS_INPUTCOMPONENT_HPP
 #define BLUNDERBUSS_INPUTCOMPONENT_HPP
 
-class SceneObject;
-class GameObject;
+#include <PatternMatch.hpp>
+#include <World.hpp>
 
 namespace sf{
     class Time;
@@ -16,8 +16,10 @@ class InputComponent
 {
 public:
     virtual ~InputComponent() = default;
-    virtual void setup() = 0;
-    virtual void update(class GameObject&, sf::Time, class World&) = 0;
+    virtual void setup(class GameObject*) = 0;
+    virtual void update(sf::Time, class World&);
+protected:
+    PatternMatch<World::Event> mPM;
 };
 
 #endif //BLUNDERBUSS_INPUTCOMPONENT_HPP

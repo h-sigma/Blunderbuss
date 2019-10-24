@@ -19,9 +19,12 @@ namespace sf{
 
 class World : public sf::Drawable {
 public:
-    enum class Event{
-        Up, Left, Down, Right, Jump, Print
+    enum class Event : uint{
+        Nil, Up, Left, Down, Right, Jump, Print, Press, Drag, Release
     };
+//    static uint operatoruint(Event event){
+//        return static_cast<uint>(event);
+//    }
     using EventQueue = std::vector<World::Event>;
 public:
     explicit World(State::Context);
@@ -31,12 +34,14 @@ public:
 
     [[nodiscard]] const EventQueue& readQueue() const { return mQueue; }
     void pushEventToQueue(const sf::Event& event);
+    void pushEventToQueue(World::Event);
     void queueLoadScene(std::string);
 protected:
     void draw(sf::RenderTarget&, sf::RenderStates) const override;
 private:
     void loadScene();
     std::string mNextSceneToLoad = "";
+    void clearQueue();
 private:
     EventQueue mQueue;
     State::Context mContext;

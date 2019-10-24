@@ -27,10 +27,15 @@ void World::pushEventToQueue(const sf::Event &event) {
         case sf::Event::MouseWheelScrolled:
             break;
         case sf::Event::MouseButtonPressed:
+            mQueue.push_back(World::Event::Press);
             break;
         case sf::Event::MouseButtonReleased:
+            mQueue.erase(std::remove(mQueue.begin(),mQueue.end(),World::Event::Press), mQueue.end());
+            mQueue.push_back(World::Event::Release);
             break;
         case sf::Event::MouseMoved:
+            if(std::find(mQueue.begin(),mQueue.end(),World::Event::Press) != mQueue.end())
+                mQueue.push_back(World::Event::Drag);
             break;
         case sf::Event::MouseEntered:
             break;
@@ -87,6 +92,18 @@ void World::pushEventToQueue(const sf::Event &event) {
     }
 }
 
+void World::clearQueue() {
+    auto foundRelease = std::find(mQueue.begin(), mQueue.end(), World::Event::Release);
+    auto foundPress = std::find(mQueue.begin(),mQueue.end(), World::Event::Press);
+    if(foundRelease == mQueue.end() && foundPress != mQueue.end())
+    {
+        mQueue.clear();
+        mQueue.push_back(World::Event::Press);
+    }
+    else
+        mQueue.clear();
+}
+
 World::World(State::Context context) : mContext(context), mLoader(mDispenser), mGameScene(nullptr){
     mLoader.registerScene<TestScene>("TestScene");
     queueLoadScene("TestScene");
@@ -97,7 +114,7 @@ void World::update(sf::Time dt) {
 
     if(mGameScene)
         mGameScene->update(dt, *this);
-    mQueue.clear();
+    clearQueue();
 }
 
 void World::draw(sf::RenderTarget & target, sf::RenderStates states) const {
@@ -114,3 +131,8 @@ void World::loadScene() {
         mGameScene = mLoader.loadScene(mNextSceneToLoad);
     mNextSceneToLoad.clear();
 }
+
+void World::pushEventToQueue(World::Event event) {
+    mQueue.push_back(event);
+}
+

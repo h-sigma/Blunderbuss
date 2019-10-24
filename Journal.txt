@@ -28,7 +28,13 @@ First, time to implement CRTP for Scene, as then I should be able to use the sta
 
 AAAAND success!
 
-The basic architecture functions!
+The basic architecture functions! I have learned how to use CRTP, even though some people may frown on binding together the stateless
+Scene functions into a class.
 Time to design the components for the playable character.
 
 To-Do: Design components for the playable character to begin some semblance of a game.
+Done: October 24, 2019: Flicks work. Character is controllable now.
+
+October 24, 2019
+~~~~~~~~~~~~~~~~~~~~
+To-Do: Attempt to change to an Entity Component System.

@@ -28,6 +28,7 @@ public:
         auto root = dispenser.getPrefab<SceneObject>("root");
         auto purlox = dispenser.getPrefab<GameObject>("Purlox");
         purlox->setPosition(50,50);
+        purlox->setScale(0.5f, 0.5f);
         root->attachChild(std::move(purlox));
         return root;
     }

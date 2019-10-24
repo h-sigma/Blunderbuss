@@ -10,17 +10,22 @@
 #include <PhysicsComponent.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/Clock.hpp>
+#include <PatternMatch.hpp>
+#include <World.hpp>
 
 class PurloxInput : public InputComponent
 {
 public:
     ~PurloxInput() final = default;
-    void setup() final;
-    void update(class GameObject&, sf::Time, class World&) override;
+    void setup(class GameObject*) final;
 private:
-    void handleMovement(class GameObject&, class World &) ;
+    static void print(class GameObject*);
+    void flickBegin(class GameObject*);
+    void flickAction(class GameObject*);
 private:
-    //state variables
+    sf::Vector2f mPos;
+    sf::Clock flickClock;
 };
 
 class PurloxGraphics : public GraphicsComponent
@@ -52,12 +57,17 @@ private:
 
 
 class PurloxPhysics : public PhysicsComponent
-
 {
 public:
     ~PurloxPhysics() final = default;
     void setup() final;
     void update(class GameObject&, sf::Time, class World&) final;
+private:
+    void resolveForces(class GameObject&, sf::Time dt);
+public:
+    float mMass = 1.f;
+    float mScale = 10.f;
+    sf::Vector2f mVelocity {0.f, 0.f};
 };
 
 #endif //BLUNDERBUSS_PURLOX_HPP
